@@ -7,6 +7,7 @@ import { baseRouter } from './routes/base.routes';
 
 // Initialize express
 export const app = express();
+app.disable('x-powered-by');
 
 //Connectar a la BBDD
 await createConnection();

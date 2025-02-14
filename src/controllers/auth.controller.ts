@@ -8,8 +8,8 @@ import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
 
 export class AuthController {
-  private userService: UserService;
-  private authService: AuthService;
+  private readonly userService: UserService;
+  private readonly authService: AuthService;
 
   constructor() {
     this.userService = new UserService();

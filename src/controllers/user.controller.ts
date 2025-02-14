@@ -7,7 +7,7 @@ import { httpStatus } from '../config/httpStatusCodes';
 import { UserService } from '../services/user.service';
 
 export class UserController {
-  private userService: UserService;
+  private readonly userService: UserService;
 
   constructor() {
     this.userService = new UserService();

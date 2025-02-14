@@ -15,7 +15,7 @@ export class UserRepository {
     this.baseRepository = new BaseRepository(prisma.user as unknown as IRepositoryDelegate<User>);
   }
 
-  private transformId = (user: User | null): IUser | null => {
+  private readonly transformId = (user: User | null): IUser | null => {
     if (!user) {
       return null;
     }

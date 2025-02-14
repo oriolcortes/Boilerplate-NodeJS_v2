@@ -8,7 +8,7 @@ import { httpStatus } from '../config/httpStatusCodes';
 import { AppError } from './application.error';
 
 export class TokenHelper {
-  static generateToken = (payload: object): string => {
+  static readonly generateToken = (payload: object): string => {
     const options: jwt.SignOptions = {
       expiresIn: '1h',
     };
@@ -19,7 +19,7 @@ export class TokenHelper {
     return token;
   };
 
-  static verifyToken = (token: string): string | JwtPayload => {
+  static readonly verifyToken = (token: string): string | JwtPayload => {
     if (!SECRET_KEY) {
       throw new AppError('SECRET_KEY is not defined', httpStatus.INTERNAL_SERVER_ERROR);
     }

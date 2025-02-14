@@ -25,7 +25,7 @@ export class UserService {
     };
   }
 
-  private normalizeUserData = (data: IUser): IUser => {
+  private readonly normalizeUserData = (data: IUser): IUser => {
     const normalizedData = { ...data };
     if (data.name && typeof data.name === 'string') {
       normalizedData.name = data.name.trim();
@@ -45,7 +45,7 @@ export class UserService {
     return normalizedData;
   };
 
-  private getAge = (birthday: Date): number => {
+  private readonly getAge = (birthday: Date): number => {
     const today = new Date();
     let age = today.getFullYear() - birthday.getFullYear();
     const monthDiff = today.getMonth() - birthday.getMonth();
@@ -55,7 +55,7 @@ export class UserService {
     return age;
   };
 
-  private validatePassword = (password: string): boolean => {
+  private readonly validatePassword = (password: string): boolean => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&_])[A-Za-z\d@$!%*?&_]{5,30}$/;
     const isValid = passwordRegex.test(password);
     if (!isValid) {
@@ -91,15 +91,15 @@ export class UserService {
 
   create = async (data: IUser): Promise<IUser | null> => {
     const normalizedData = this.normalizeUserData(data);
-    const existingUser = await this.userRepository.getByEmail(normalizedData.email as string, this.defaultProjection);
+    const existingUser = await this.userRepository.getByEmail(normalizedData.email, this.defaultProjection);
     if (existingUser) {
       throw new AppError('A user with this email already exists', httpStatus.CONFLICT);
     }
-    if (this.getAge(normalizedData.birthday as Date) < 18) {
+    if (this.getAge(normalizedData.birthday) < 18) {
       throw new AppError('User must be at least 18 years old', httpStatus.BAD_REQUEST);
     }
-    this.validatePassword(normalizedData.password as string);
-    normalizedData.password = await PasswordHelper.hashPassword(normalizedData.password as string);
+    this.validatePassword(normalizedData.password);
+    normalizedData.password = await PasswordHelper.hashPassword(normalizedData.password);
     const projection = { ...this.defaultProjection, isBlocked: false };
     return this.userRepository.create(normalizedData, projection);
   };
@@ -114,18 +114,18 @@ export class UserService {
     }
 
     const normalizedData = this.normalizeUserData(data);
-    if (this.getAge(normalizedData.birthday as Date) < 18) {
+    if (this.getAge(normalizedData.birthday) < 18) {
       throw new AppError('User must be at least 18 years old', httpStatus.BAD_REQUEST);
     }
     if (normalizedData.email) {
-      const existingUser = await this.userRepository.getByEmail(normalizedData.email as string, this.defaultProjection);
+      const existingUser = await this.userRepository.getByEmail(normalizedData.email, this.defaultProjection);
       if (existingUser && existingUser.id && existingUser.id.toString() !== id) {
         throw new AppError('A user with this email already exists', httpStatus.CONFLICT);
       }
     }
     if (normalizedData.password) {
-      this.validatePassword(normalizedData.password as string);
-      normalizedData.password = await PasswordHelper.hashPassword(normalizedData.password as string);
+      this.validatePassword(normalizedData.password);
+      normalizedData.password = await PasswordHelper.hashPassword(normalizedData.password);
     }
     const projection = { ...this.defaultProjection };
     const userUpdated = await this.userRepository.update(id, normalizedData, projection);

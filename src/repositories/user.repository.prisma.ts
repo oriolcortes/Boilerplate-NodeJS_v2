@@ -33,7 +33,7 @@ export class UserRepository {
 
   find = async (
     filters: Record<string, unknown> = {},
-    projection: Record<string, boolean>,
+    projection: Record<string, boolean> = {},
     pagination: { skip: number; limit: number } = { skip: 0, limit: 0 },
   ): Promise<(IUser | null)[]> => {
     return (await this.baseRepository.find(filters, projection, pagination)).map((user) => this.transformId(user));

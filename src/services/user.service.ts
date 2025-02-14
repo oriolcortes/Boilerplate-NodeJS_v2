@@ -119,7 +119,7 @@ export class UserService {
     }
     if (normalizedData.email) {
       const existingUser = await this.userRepository.getByEmail(normalizedData.email, this.defaultProjection);
-      if (existingUser && existingUser.id && existingUser.id.toString() !== id) {
+      if (existingUser?.id && existingUser?.id.toString() !== id) {
         throw new AppError('A user with this email already exists', httpStatus.CONFLICT);
       }
     }

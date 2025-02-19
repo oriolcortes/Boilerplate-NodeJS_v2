@@ -37,7 +37,7 @@ Copia el archivo `.env.sample` a `.env` y actualiza los valores según tu entorn
 cp .env.sample .env
 ```
 
-Ejemplo parcial de archivo .env:
+Ejemplo parcial de archivo `.env`:
 
 ```dotenv
 # Port on which the server will run.
@@ -59,7 +59,7 @@ DATABASE_URL=mongodb+srv://<username>:<password>@<cluster-url>/<dbname>?retryWri
 # DATABASE_URL=postgresql://<username>:<password>@<host>:5432/<dbname>?sslmode=require
 ```
 
-Para ver la configuración completa, revisa el archivo **.env.sample** en la raíz del proyecto.
+Para ver la configuración completa, revisa el archivo `.env.sample` en la raíz del proyecto.
 
 ### 3. Instalar dependencias
 
@@ -77,7 +77,7 @@ npm install
 tsx watch --env-file=.env ./src/server.ts
 ```
 
-- **npm run lint :** Ejecuta ESLint en el directorio _src_ para detectar problemas de estilo y errores de código.
+- **npm run lint :** Ejecuta ESLint en el directorio `src` para detectar problemas de estilo y errores de código.
 
 ```bash
 eslint src
@@ -89,7 +89,7 @@ eslint src
 eslint src --fix
 ```
 
-- **npm run format :** Formatea el código en el directorio _src_ usando Prettier para mantener un estilo consistente.
+- **npm run format :** Formatea el código en el directorio `src` usando Prettier para mantener un estilo consistente.
 
 ```bash
 prettier --write src
@@ -103,7 +103,7 @@ prettier --write src
 
 ### EditorConfig
 
-El proyecto incluye un archivo **.editorconfig** para asegurar un estilo de codificación consistente.
+El proyecto incluye un archivo `.editorconfig` para asegurar un estilo de codificación consistente.
 
 - **Instalación:**
   Instala la extensión EditorConfig en VS Code para que se apliquen automáticamente las reglas definidas en el archivo.
@@ -123,7 +123,7 @@ trim_trailing_whitespace = true
 max_line_length = 120
 ```
 
-Para ver la configuración completa, revisa el archivo **.editorconfig** en la raíz del proyecto.
+Para ver la configuración completa, revisa el archivo `.editorconfig` en la raíz del proyecto.
 
 ### Prettier
 
@@ -139,7 +139,7 @@ Para ver la configuración completa, revisa el archivo **.editorconfig** en la r
   Instala la extensión ESLint en VS Code.
 
 - **Uso:**
-  ESLint analizará el código en el directorio src para identificar y reportar problemas de estilo y errores.
+  ESLint analizará el código en el directorio `src` para identificar y reportar problemas de estilo y errores.
 
 ### GitLens
 
@@ -168,18 +168,18 @@ Te recomiendo instalar las siguientes extensiones para mantener un entorno de de
 }
 ```
 
-Para ver la lista completa, revisa el archivo **extensions.json** en la carpeta **.vscode**.
+Para ver la lista completa, revisa el archivo `extensions.json` en la carpeta `.vscode`.
 
 ## ⚙️ Configuraciones del Editor (VS Code)
 
-Este proyecto incluye un archivo de configuración en la carpeta .vscode (settings.json) que define ajustes recomendados para mejorar la experiencia de desarrollo. Entre estos ajustes se encuentran:
+Este proyecto incluye un archivo de configuración en la ubicación `.vscode/settings.json` que define ajustes recomendados para mejorar la experiencia de desarrollo. Entre estos ajustes se encuentran:
 
 - **Formateo automático al guardar** (usando Prettier).
 - **Configuraciones para ESLint y Prettier** para mantener un código limpio y consistente.
 - **Ajustes de indentación, word wrap y recorte de espacios en blanco** que aseguran un estilo uniforme en todos los archivos.
 - **Configuración del tema de iconos** (vscode-icons) para una mejor visualización del proyecto.
 
-Si utilizas VS Code, te recomendamos que adoptes estas configuraciones para trabajar de manera óptima. Para ver o modificar estos ajustes, revisa el archivo **.vscode/settings.json** en la raíz del proyecto.
+Si utilizas VS Code, te recomendamos que adoptes estas configuraciones para trabajar de manera óptima. Para ver o modificar estos ajustes, revisa el archivo `.vscode/settings.json` en la raíz del proyecto.
 
 ## 🚀 Arquitectura del Proyecto
 

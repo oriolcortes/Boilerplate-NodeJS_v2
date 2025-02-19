@@ -3,7 +3,8 @@
 
 import { app } from './app';
 import { PORT } from './config/config';
+import logger from './config/logger';
 
 app.listen(PORT, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+  logger.info(`⚡️[server]: Server is running at http://localhost:${PORT}`);
 });

@@ -2,20 +2,29 @@
 // This file is responsible for setting up and exporting the Prisma client instance.
 
 import { PrismaClient } from '@prisma/client';
+import logger from './logger';
 
 export const prisma = new PrismaClient();
 
 export const createConnection = async () => {
   try {
+    logger.info('Attempting to connect to the DB...');
     await prisma.$connect();
-    console.log('INFO Connected to the DB');
+    logger.info('Connected to the DB');
   } catch (error) {
-    console.log('ERROR Cannot connect to the DB: ', error);
+    logger.error({ error }, 'Cannot connect to the DB');
+    process.exit(1);
   }
 };
 
 process.on('SIGINT', async () => {
-  console.log('INFO Closing the DB connection');
-  await prisma.$disconnect();
-  process.exit(0);
+  logger.info('SIGINT received. Closing the DB connection...');
+  try {
+    await prisma.$disconnect();
+    logger.info('DB connection closed. Exiting process.');
+  } catch (error) {
+    logger.error({ error }, 'Error while disconnecting from the DB');
+  } finally {
+    process.exit(0);
+  }
 });

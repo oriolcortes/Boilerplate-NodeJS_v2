@@ -2,8 +2,11 @@
 // Processes requests from the controller and interacts with the repository as needed.
 
 import { httpStatus } from '../config/httpStatusCodes';
+import logger from '../config/logger';
 import { AppError } from '../utils/application.error';
 import { UserRepository } from '../repositories/user.repository';
+// For PostgreSQL with Prisma uncomment the following line and comment the previous one
+// import { UserRepository } from '../repositories/user.repository.prisma';
 import { PasswordHelper } from '../utils/password.helper';
 import { TokenHelper } from '../utils/token.helper';
 import { IUser } from '../types/user.interface';
@@ -27,19 +30,24 @@ export class AuthService {
   }
 
   login = async (email: string, password: string): Promise<Partial<IUser>> => {
+    logger.debug(`AuthService: Attempting login for email: ${email}`);
     const projection = { ...this.defaultProjection, password: true };
     const user = await this.userRepository.getByEmail(email, projection);
     if (!user) {
+      logger.warn(`AuthService: User not found for email: ${email}`);
       throw new AppError('User not found', httpStatus.NOT_FOUND);
     }
     if (user.isBlocked) {
+      logger.warn(`AuthService: User with email ${email} is blocked`);
       throw new AppError('User is blocked', httpStatus.FORBIDDEN);
     }
     const isPasswordValid = await PasswordHelper.comparePasswords(password, user.password);
     if (!isPasswordValid) {
+      logger.warn(`AuthService: Invalid password for email: ${email}`);
       throw new AppError('Invalid password', httpStatus.UNAUTHORIZED);
     }
     const token = TokenHelper.generateToken({ id: user.id });
+    logger.info(`AuthService: Login successful for email: ${email}`);
     return { ...user, token };
   };
 }

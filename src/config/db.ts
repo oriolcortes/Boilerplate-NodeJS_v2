@@ -3,6 +3,7 @@
 
 import mongoose, { type ConnectOptions } from 'mongoose';
 import { DATABASE_URL } from './config';
+import logger from './logger';
 
 export const createConnection = async () => {
   try {
@@ -11,13 +12,17 @@ export const createConnection = async () => {
     if (!DATABASE_URL) {
       throw new Error('DATABASE_URL is not defined');
     }
+
+    logger.info('Attempting to connect to the DB...');
     await mongoose.connect(DATABASE_URL, options);
-    console.log('INFO Connected to the DB');
+    logger.info('Connected to the DB');
 
     mongoose.connection.on('error', (error) => {
-      console.log('ERROR The connection was interrupted: ', error);
+      logger.error({ error }, 'The connection was interrupted');
+      process.exit(1);
     });
   } catch (error) {
-    console.log('ERROR Cannot connect to the DB: ', error);
+    logger.error({ error }, 'Cannot connect to the DB');
+    process.exit(1);
   }
 };

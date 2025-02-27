@@ -9,7 +9,6 @@ import { UserRepository } from '../repositories/user.repository';
 // import { UserRepository } from '../repositories/user.repository.prisma';
 import { PasswordHelper } from '../utils/password.helper';
 import { TokenHelper } from '../utils/token.helper';
-import { IUser } from '../interfaces/user.interface';
 import { LoginUserDto } from '../interfaces/loginUser.interface';
 
 export class AuthService {

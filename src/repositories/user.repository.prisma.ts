@@ -4,7 +4,7 @@
 import { Prisma, PrismaClient, User } from '@prisma/client';
 import { BaseRepository, IRepositoryDelegate } from './base.repository.prisma';
 import { AppError } from '../utils/application.error';
-import { IUser } from '../types/user.interface';
+import { IUser } from '../interfaces/user.interface';
 
 const prisma = new PrismaClient();
 

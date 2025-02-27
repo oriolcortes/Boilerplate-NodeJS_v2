@@ -3,8 +3,9 @@
 
 import logger from '../config/logger';
 import { IUserModel, UserModel } from '../models/user.model';
-import { IUser } from '../types/user.interface';
+import { IUser } from '../interfaces/user.interface';
 import { BaseRepository } from './base.repository';
+import { LoginUserDto } from '../interfaces/loginUser.interface';
 
 export class UserRepository {
   private readonly baseRepository: BaseRepository<IUserModel>;
@@ -68,7 +69,7 @@ export class UserRepository {
     return filteredUser as IUser;
   };
 
-  getByEmail = async (email: string, projection: Record<string, boolean>): Promise<IUser | null> => {
+  getByEmail = async (email: string, projection: Record<string, boolean>): Promise<LoginUserDto | null> => {
     logger.debug(`Repository: Fetching user by email: ${email}`);
     const filters = { email };
     const userFound = await this.baseRepository.findOne(filters, this.mapProjection(projection));

@@ -2,7 +2,7 @@
 // Defines the structure of user documents in the database.
 
 import mongoose from 'mongoose';
-import { IUser } from '../types/user.interface';
+import { IUser } from '../interfaces/user.interface';
 
 export interface IUserModel extends Omit<IUser, 'id'>, mongoose.Document {
   _id: mongoose.Types.ObjectId;

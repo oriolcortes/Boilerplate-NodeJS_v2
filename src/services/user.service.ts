@@ -8,7 +8,7 @@ import { UserRepository } from '../repositories/user.repository';
 // For PostgreSQL with Prisma uncomment the following line and comment the previous one
 // import { UserRepository } from '../repositories/user.repository.prisma';
 import { PasswordHelper } from '../utils/password.helper';
-import { IUser } from '../types/user.interface';
+import { IUser } from '../interfaces/user.interface';
 
 export class UserService {
   private readonly userRepository: UserRepository;

@@ -9,7 +9,8 @@ import { UserRepository } from '../repositories/user.repository';
 // import { UserRepository } from '../repositories/user.repository.prisma';
 import { PasswordHelper } from '../utils/password.helper';
 import { TokenHelper } from '../utils/token.helper';
-import { IUser } from '../types/user.interface';
+import { IUser } from '../interfaces/user.interface';
+import { LoginUserDto } from '../interfaces/loginUser.interface';
 
 export class AuthService {
   private readonly userRepository: UserRepository;
@@ -29,7 +30,7 @@ export class AuthService {
     };
   }
 
-  login = async (email: string, password: string): Promise<Partial<IUser>> => {
+  login = async (email: string, password: string): Promise<LoginUserDto> => {
     logger.debug(`AuthService: Attempting login for email: ${email}`);
     const projection = { ...this.defaultProjection, password: true };
     const user = await this.userRepository.getByEmail(email, projection);

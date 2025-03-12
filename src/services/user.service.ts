@@ -5,8 +5,6 @@ import { httpStatus } from '../config/httpStatusCodes';
 import logger from '../config/logger';
 import { AppError } from '../utils/application.error';
 import { UserRepository } from '../repositories/user.repository';
-// For PostgreSQL with Prisma uncomment the following line and comment the previous one
-// import { UserRepository } from '../repositories/user.repository.prisma';
 import { PasswordHelper } from '../utils/password.helper';
 import { IUser } from '../interfaces/user.interface';
 

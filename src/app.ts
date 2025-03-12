@@ -2,8 +2,6 @@
 
 import express from 'express';
 import { createConnection } from './config/db';
-// For PostgreSQL with Prisma uncomment the following line and comment the previous one
-// import { createConnection } from './config/db.prisma';
 import { baseRouter } from './routes/base.routes';
 
 // Initialize express

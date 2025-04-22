@@ -3,6 +3,7 @@
 import express from 'express';
 import cors from 'cors';
 import { CLIENT_URL } from './config/config';
+import { createConnection } from './config/db';
 // For PostgreSQL with Prisma uncomment the following line and comment the previous one
 // import { createConnection } from './config/db.prisma';
 import { baseRouter } from './routes/base.routes';
@@ -17,7 +18,7 @@ app.use(cors());
 app.use(cors({ origin: CLIENT_URL }));
 
 // Connect to the database
-// await createConnection();
+(async () => await createConnection())();
 
 app.get('/ping', (req, res) => res.send('pong'));
 

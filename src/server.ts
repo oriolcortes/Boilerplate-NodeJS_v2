@@ -7,7 +7,7 @@ import { PORT } from './config/config.js';
 import logger from './config/logger.js';
 
 // Connect to the database
-await createConnection();
+(async () => await createConnection())();
 
 app.listen(PORT, () => {
   logger.info(`⚡️[server]: Server is running at http://localhost:${PORT}`);
